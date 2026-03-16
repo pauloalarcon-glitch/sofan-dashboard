@@ -288,15 +288,17 @@ function saveAndLoad() {
   loadData();
 }
 
-document.getElementById('btnCfg').onclick = function() { showOverlay(); };
-document.getElementById('btnRef').onclick = function() { loadData(); };
-document.getElementById('btnCancel').onclick = function() { hideOverlay(); };
-document.getElementById('btnSave').onclick = function() { saveAndLoad(); };
-
-document.getElementById('t1').onclick = function() { showTab('p1', this); };
-document.getElementById('t2').onclick = function() { showTab('p2', this); };
-document.getElementById('t3').onclick = function() { showTab('p3', this); };
-document.getElementById('t4').onclick = function() { showTab('p4', this); };
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('btnCfg').onclick = function() { showOverlay(); };
+  document.getElementById('btnRef').onclick = function() { loadData(); };
+  document.getElementById('btnCancel').onclick = function() { hideOverlay(); };
+  document.getElementById('btnSave').onclick = function() { saveAndLoad(); };
+  document.getElementById('t1').onclick = function() { showTab('p1', this); };
+  document.getElementById('t2').onclick = function() { showTab('p2', this); };
+  document.getElementById('t3').onclick = function() { showTab('p3', this); };
+  document.getElementById('t4').onclick = function() { showTab('p4', this); };
+  if (CFG.id) { loadData(); } else { showOverlay(); }
+});
 
 function showTab(pid, btn) {
   document.querySelectorAll('.panel').forEach(function(p) { p.className = 'panel'; });
@@ -719,11 +721,7 @@ function renderTraz() {
   div.appendChild(tbl);
 }
 
-if (CFG.id) {
-  loadData();
-} else {
-  showOverlay();
-}
+
 </script>
 </body>
 </html>
