@@ -306,8 +306,8 @@
   <div class="header-right">
     <span class="header-title">Dashboard Estratégico 2026</span>
     <span class="update-badge" id="lastUpdate">Sin datos cargados</span>
-    <button class="btn-refresh" id="btnConfig" type="button">⚙️ Configurar</button>
-    <button class="btn-refresh" id="btnRefresh" type="button" style="display:none">↻ Actualizar</button>
+    <button class="btn-refresh" type="button" onclick="document.getElementById('configPanel').style.display='flex'">⚙️ Configurar</button>
+    <button class="btn-refresh" id="btnRefresh" type="button" style="display:none" onclick="loadData()">↻ Actualizar</button>
   </div>
 </header>
 
@@ -323,8 +323,8 @@
     <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Nombre pestaña Empresas</div>
     <input id="inputEmpresas" type="text" value="Empresas" style="width:100%;padding:10px 14px;border:1.5px solid #E0DBF0;border-radius:8px;font-size:13px;margin-bottom:20px;box-sizing:border-box;" />
     <div style="display:flex;gap:10px;justify-content:flex-end;">
-      <button id="btnCancelConfig" type="button" style="background:#F4F4F6;color:#555;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Cancelar</button>
-      <button id="btnSaveConfig" type="button" style="background:#5B3FA0;color:white;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">Guardar y cargar datos</button>
+      <button type="button" style="background:#F4F4F6;color:#555;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;" onclick="document.getElementById('configPanel').style.display='none'">Cancelar</button>
+      <button type="button" style="background:#5B3FA0;color:white;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;" onclick="saveConfig()">Guardar y cargar datos</button>
     </div>
   </div>
 </div>
@@ -909,12 +909,6 @@ function renderTrazabilidad() {
 // ══════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════
-// Wire up buttons via addEventListener instead of onclick
-document.getElementById('btnConfig').addEventListener('click', function() { openConfig(); });
-document.getElementById('btnRefresh').addEventListener('click', function() { loadData(); });
-document.getElementById('btnCancelConfig').addEventListener('click', function() { closeConfig(); });
-document.getElementById('btnSaveConfig').addEventListener('click', function() { saveConfig(); });
-
 if (CONFIG.sheetId) {
   loadData();
 } else {
